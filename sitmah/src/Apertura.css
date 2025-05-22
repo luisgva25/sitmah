@@ -1,0 +1,438 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #6F2234;
+}
+
+.sitmah-header {
+  background-color: #4B0C25;
+  color: #CBB26A;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.main-content {
+  padding: 3rem;
+  text-align: center;
+}
+
+.main-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4B0C25;
+}
+
+.main-content p {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.button {
+  background-color: #7C1C3B;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #5F122B;
+}
+
+.sitmah-footer {
+  background-color: #4B0C25;
+  color: #CBB26A;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-body {
+  background-color: #F4F1EC;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem 2.5rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-idusuario:hover {
+  background-color: #fff0c7;
+  color: black;
+  transform: scale(1.03);
+  transition: 0.5s;
+}
+
+.login-idusuario {
+  transition: 0.7s;
+}
+
+.login-logo {
+  width: 60px;
+  height: 60px;
+  background-color: #4B0C25;
+  color: #CBB26A;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  color: #4B0C25;
+}
+
+.login-card label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.login-card input,
+.login-card select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-card button {
+  background-color: #7C1C3B;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-card button:hover {
+  background-color: #5F122B;
+}
+
+.login-logo-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+}
+
+.login-logo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.login-logo-wrapper:hover .login-logo-img {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.7);
+}
+
+.login-logo-border {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: conic-gradient(from 0deg,
+      #FFD700,
+      #FFA500,
+      #FFD700,
+      #FF8C00,
+      #FFD700);
+  animation: spin 3s linear infinite;
+  z-index: 1;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+  }
+  to {
+    transform: rotate(360deg);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+  }
+}
+
+/* Estilos para la página de apertura */
+.apertura-page {
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #6F2234;
+  color: #CBB26A;
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-link {
+  color: #CBB26A;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  transition: background-color 0.3s, color 0.3s;
+  border: 1px solid transparent;
+}
+
+.navbar-link.active, .navbar-link:hover {
+  background-color: #CBB26A;
+  color: #6F2234;
+  border: 1px solid #6F2234;
+}
+
+.logout-button {
+  background-color: #6F2234;
+  color: #CBB26A;
+  border: 1px solid #CBB26A;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #CBB26A;
+  color: #6F2234;
+  border: 1px solid #6F2234;
+}
+
+.apertura-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2.5rem 1rem 2rem 1rem;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+/* Estilos para área de archivo */
+.archivo-uploader {
+  border: 2px dashed #CBB26A;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin: 2.5rem auto 0 auto;
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #6F2234;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Centrar y ampliar el botón de ingreso de datos */
+.archivo-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6F2234;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1.2rem 2.5rem;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 2px solid #CBB26A;
+  margin: 0 auto 2.5rem auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.archivo-label:hover {
+  background-color: #CBB26A;
+  color: #6F2234;
+  box-shadow: 0 4px 16px rgba(128,0,32,0.10);
+}
+
+.archivo-text {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.archivo-icon {
+  display: block;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  color: #6F2234;
+}
+
+/* Título y contenedor de la tabla */
+.apertura-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  color: #6F2234;
+  font-weight: 700;
+  text-align: left;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.table {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(128,0,32,0.07);
+  font-size: 1.08rem;
+  border: 1px solid #CBB26A;
+}
+
+.table th {
+  background: #6F2234;
+  color: #CBB26A;
+  font-weight: 700;
+  padding: 1.1rem 0.7rem;
+  text-align: left;
+  font-size: 1.05rem;
+  border-bottom: 1px solid #CBB26A;
+}
+
+.table td {
+  padding: 1rem 0.7rem;
+  color: #6F2234;
+  border-bottom: 1px solid #CBB26A;
+  background: #fff;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover td {
+  background: #FFF8DC;
+}
+
+/* Ajustar la columna de acciones */
+.table th:last-child,
+.table td:last-child {
+  text-align: center;
+  width: 110px;
+}
+
+.btn-delete {
+  background-color: #6F2234;
+  border: 1px solid #CBB26A;
+  font-size: 1.1rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  color: #CBB26A;
+  border-radius: 2px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #CBB26A;
+  color: #6F2234;
+}
+
+@media (max-width: 900px) {
+  .apertura-content h2, .table {
+    max-width: 98vw;
+    font-size: 1rem;
+  }
+  .table th, .table td {
+    padding: 0.7rem 0.3rem;
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0.5rem;
+  }
+  .apertura-content {
+    padding: 1rem 0.2rem;
+  }
+  .archivo-label {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .apertura-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .table {
+    font-size: 0.95rem;
+  }
+} 
