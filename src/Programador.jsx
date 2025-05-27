@@ -198,7 +198,7 @@ function Programador() {
                     <div className="form-section">
                         <form onSubmit={handleSubmit} className="apertura-form">
                             <div className="form-group">
-                                <label>Ruta:</label>
+                                <h3>Ruta:</h3>
                                 <input
                                     type="text"
                                     name="ruta"
