@@ -216,7 +216,16 @@ function App() {
           id: Date.now(),
           fechaCreacion: new Date().toISOString(),
           nombre: `Tabla de Horarios - ${new Date().toLocaleDateString()}`,
-          horarios: schedules
+          horarios: schedules.map(schedule => ({
+            id: schedule.id,
+            ruta: schedule.ruta,
+            fecha: schedule.fecha,
+            horaSalida: schedule.horaSalida,
+            intervalo: schedule.intervalo,
+            corridaIni: schedule.corridaIni,
+            corridaFin: schedule.corridaFin,
+            apertura: schedule.apertura || null
+          }))
         };
         
         tablasCombinadas.push(nuevaTabla);

@@ -15,6 +15,10 @@ const programacionSchema = new mongoose.Schema({
             type: String,
             required: [true, 'La corrida es obligatoria']
         },
+        apertura: {
+            type: String,
+            required: false
+        },
         estado: {
             type: String,
             enum: ['pendiente', 'asignado', 'completado'],

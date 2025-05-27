@@ -120,6 +120,9 @@ function TablaCompleta() {
                 <th>Ruta</th>
                 <th>Fecha</th>
                 <th>Hora de Salida</th>
+                <th>Intervalo</th>
+                <th>Corrida Inicial</th>
+                <th>Corrida Final</th>
                 <th>Tipo de Unidad</th>
                 <th>Economico</th>
                 <th>Tarjeton</th>
@@ -127,20 +130,20 @@ function TablaCompleta() {
               </tr>
             </thead>
             <tbody>
-              {tablaActual.horarios.map((horario, idx) => {
-                const apertura = tablaActual.aperturas?.find(a => a.ruta === horario.ruta);
-                return (
-                  <tr key={idx}>
-                    <td>{horario.ruta}</td>
-                    <td>{horario.fecha}</td>
-                    <td>{horario.horaSalida}</td>
-                    <td>{apertura?.tipoUnidad || ''}</td>
-                    <td>{apertura?.economico || ''}</td>
-                    <td>{apertura?.tarjeton || ''}</td>
-                    <td>{apertura?.nombre || ''}</td>
-                  </tr>
-                );
-              })}
+              {tablaActual.horarios.map((horario, idx) => (
+                <tr key={idx}>
+                  <td>{horario.ruta}</td>
+                  <td>{horario.fecha}</td>
+                  <td>{horario.horaSalida}</td>
+                  <td>{horario.intervalo || '-'}</td>
+                  <td>{horario.corridaIni || '-'}</td>
+                  <td>{horario.corridaFin || '-'}</td>
+                  <td>{horario.apertura?.tipoUnidad || '-'}</td>
+                  <td>{horario.apertura?.economico || '-'}</td>
+                  <td>{horario.apertura?.tarjeton || '-'}</td>
+                  <td>{horario.apertura?.nombre || '-'}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

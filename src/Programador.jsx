@@ -17,6 +17,7 @@ function Programador() {
         hora: '',
         corrida: ''
     });
+    const [editandoProgramacion, setEditandoProgramacion] = useState(null);
 
     useEffect(() => {
         cargarProgramaciones();
@@ -75,6 +76,24 @@ function Programador() {
         }));
     };
 
+    const iniciarEdicion = (programacion) => {
+        setEditandoProgramacion(programacion);
+        setFormData({
+            ruta: programacion.ruta,
+            horarios: programacion.horarios,
+            programador: programacion.programador
+        });
+    };
+
+    const cancelarEdicion = () => {
+        setEditandoProgramacion(null);
+        setFormData({
+            ruta: '',
+            horarios: [],
+            programador: localStorage.getItem('userId') || ''
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -87,12 +106,10 @@ function Programador() {
             return;
         }
 
-        // Asegurarnos que tenemos un programador
         if (!formData.programador) {
-            formData.programador = 'programador1'; // Temporal, después se reemplazará con el ID real
+            formData.programador = 'programador1';
         }
 
-        // Preparar los datos para enviar
         const datosAEnviar = {
             ruta: formData.ruta,
             horarios: formData.horarios.map(h => ({
@@ -104,30 +121,66 @@ function Programador() {
             estado: 'activo'
         };
 
-        console.log('Datos a enviar:', datosAEnviar); // Para depuración
-
         try {
-            const respuesta = await programacionService.create(datosAEnviar);
-            console.log('Respuesta del servidor:', respuesta); // Para depuración
-            
-            Swal.fire({
-                title: '¡Éxito!',
-                text: 'Programación guardada correctamente',
-                icon: 'success'
-            });
+            if (editandoProgramacion) {
+                await programacionService.update(editandoProgramacion._id, datosAEnviar);
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Programación actualizada correctamente',
+                    icon: 'success'
+                });
+            } else {
+                await programacionService.create(datosAEnviar);
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Programación guardada correctamente',
+                    icon: 'success'
+                });
+            }
             
             setFormData({
                 ruta: '',
                 horarios: [],
                 programador: formData.programador
             });
-            
+            setEditandoProgramacion(null);
             cargarProgramaciones();
         } catch (error) {
-            console.error('Error completo:', error); // Para depuración
+            console.error('Error:', error);
             Swal.fire({
                 title: 'Error',
-                text: error.message || 'Error al guardar la programación',
+                text: 'Error al guardar la programación',
+                icon: 'error'
+            });
+        }
+    };
+
+    const eliminarProgramacion = async (id) => {
+        try {
+            const result = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            });
+
+            if (result.isConfirmed) {
+                await programacionService.delete(id);
+                Swal.fire({
+                    title: '¡Eliminado!',
+                    text: 'La programación ha sido eliminada',
+                    icon: 'success'
+                });
+                cargarProgramaciones();
+            }
+        } catch (error) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al eliminar la programación',
                 icon: 'error'
             });
         }
@@ -138,115 +191,119 @@ function Programador() {
             <Navbar />
             <main className="apertura-content">
                 <div className="apertura-header">
-                    <h2>Programación de Rutas</h2>
+                    <h2>{editandoProgramacion ? 'Editar Programación' : 'Programación de Rutas'}</h2>
                 </div>
 
-                <form onSubmit={handleSubmit} className="apertura-form">
-                    <div className="form-group">
-                        <label>Ruta:</label>
-                        <input
-                            type="text"
-                            name="ruta"
-                            value={formData.ruta}
-                            onChange={handleInputChange}
-                            placeholder="Ingrese la ruta"
-                            required
-                        />
-                    </div>
+                <div className="programador-container">
+                    <div className="form-section">
+                        <form onSubmit={handleSubmit} className="apertura-form">
+                            <div className="form-group">
+                                <label>Ruta:</label>
+                                <input
+                                    type="text"
+                                    name="ruta"
+                                    value={formData.ruta}
+                                    onChange={handleInputChange}
+                                    placeholder="Ingrese la ruta"
+                                    required
+                                />
+                            </div>
 
-                    <div className="form-group">
-                        <h3>Horarios</h3>
-                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-                            <input
-                                type="time"
-                                name="hora"
-                                value={nuevoHorario.hora}
-                                onChange={handleHorarioChange}
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="corrida"
-                                value={nuevoHorario.corrida}
-                                onChange={handleHorarioChange}
-                                placeholder="Número de corrida"
-                                required
-                            />
-                            <button
-                                type="button"
-                                onClick={agregarHorario}
-                                className="btn-submit"
-                            >
-                                Agregar Horario
-                            </button>
-                        </div>
-
-                        <div className="horarios-list">
-                            {formData.horarios.map((horario, index) => (
-                                <div key={index} style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '1rem',
-                                    marginBottom: '0.5rem',
-                                    padding: '0.5rem',
-                                    backgroundColor: '#f5f5f5',
-                                    borderRadius: '4px'
-                                }}>
-                                    <span>{horario.hora}</span>
-                                    <span>Corrida: {horario.corrida}</span>
+                            <div className="form-group">
+                                <h3>Horarios</h3>
+                                <div className="horario-inputs">
+                                    <input
+                                        type="time"
+                                        name="hora"
+                                        value={nuevoHorario.hora}
+                                        onChange={handleHorarioChange}
+                                        required
+                                    />
+                                    <input
+                                        type="text"
+                                        name="corrida"
+                                        value={nuevoHorario.corrida}
+                                        onChange={handleHorarioChange}
+                                        placeholder="Número de corrida"
+                                        required
+                                    />
                                     <button
                                         type="button"
-                                        onClick={() => eliminarHorario(index)}
-                                        style={{
-                                            padding: '0.25rem 0.5rem',
-                                            backgroundColor: '#dc3545',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            cursor: 'pointer'
-                                        }}
+                                        onClick={agregarHorario}
+                                        className="btn-submit"
                                     >
-                                        Eliminar
+                                        Agregar Horario
                                     </button>
+                                </div>
+
+                                <div className="horarios-list">
+                                    {formData.horarios.map((horario, index) => (
+                                        <div key={index} className="horario-item">
+                                            <span>{horario.hora}</span>
+                                            <span>Corrida: {horario.corrida}</span>
+                                            <button
+                                                type="button"
+                                                onClick={() => eliminarHorario(index)}
+                                                className="btn-delete"
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="form-actions">
+                                <button type="submit" className="btn-submit">
+                                    {editandoProgramacion ? 'Actualizar Programación' : 'Guardar Programación'}
+                                </button>
+                                {editandoProgramacion && (
+                                    <button
+                                        type="button"
+                                        onClick={cancelarEdicion}
+                                        className="btn-cancel"
+                                    >
+                                        Cancelar Edición
+                                    </button>
+                                )}
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="programaciones-section">
+                        <h3>Programaciones Guardadas</h3>
+                        <div className="programaciones-list">
+                            {programaciones.map(programacion => (
+                                <div key={programacion._id} className="programacion-card">
+                                    <div className="programacion-header">
+                                        <h4>Ruta: {programacion.ruta}</h4>
+                                        <div className="programacion-actions">
+                                            <button
+                                                onClick={() => iniciarEdicion(programacion)}
+                                                className="btn-edit"
+                                            >
+                                                Editar
+                                            </button>
+                                            <button
+                                                onClick={() => eliminarProgramacion(programacion._id)}
+                                                className="btn-delete"
+                                            >
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p>Fecha: {new Date(programacion.fechaCreacion).toLocaleDateString()}</p>
+                                    <div className="horarios-list">
+                                        {programacion.horarios.map((horario, index) => (
+                                            <div key={index} className="horario-badge">
+                                                {horario.hora} - Corrida {horario.corrida}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-
-                    <div className="form-actions">
-                        <button type="submit" className="btn-submit">
-                            Guardar Programación
-                        </button>
-                    </div>
-                </form>
-
-                <div className="programaciones-list" style={{ marginTop: '2rem' }}>
-                    <h3>Programaciones Guardadas</h3>
-                    {programaciones.map(programacion => (
-                        <div key={programacion._id} style={{
-                            padding: '1rem',
-                            marginBottom: '1rem',
-                            backgroundColor: 'white',
-                            borderRadius: '8px',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                        }}>
-                            <h4>Ruta: {programacion.ruta}</h4>
-                            <p>Fecha: {new Date(programacion.fechaCreacion).toLocaleDateString()}</p>
-                            <div className="horarios-list">
-                                {programacion.horarios.map((horario, index) => (
-                                    <div key={index} style={{
-                                        display: 'inline-block',
-                                        margin: '0.25rem',
-                                        padding: '0.5rem',
-                                        backgroundColor: '#f8f9fa',
-                                        borderRadius: '4px'
-                                    }}>
-                                        {horario.hora} - Corrida {horario.corrida}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </main>
         </div>

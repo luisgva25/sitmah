@@ -4,6 +4,8 @@ import './Apertura.css';
 import logoSitmah from './assets/logo-sitmah.png';
 import Swal from 'sweetalert2';
 import Navbar from './components/Navbar';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Apertura() {
   const location = useLocation();
