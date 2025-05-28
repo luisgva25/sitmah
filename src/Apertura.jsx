@@ -27,15 +27,9 @@ function Apertura() {
       navigate('/horarios');
       return;
     }
-
     // Cargar horarios desde localStorage
     const horariosGuardados = JSON.parse(localStorage.getItem('horariosActuales') || '[]');
     const horarioEncontrado = horariosGuardados.find(h => h.id === horarioId);
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
     if (horarioEncontrado) {
       setHorario(horarioEncontrado);
       // Pre-llenar la ruta del horario
@@ -54,17 +48,8 @@ function Apertura() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-
     // Cargar horarios actuales
     const horariosGuardados = JSON.parse(localStorage.getItem('horariosActuales') || '[]');
-
-=======
-    
-    // Cargar horarios actuales
-    const horariosGuardados = JSON.parse(localStorage.getItem('horariosActuales') || '[]');
-    
->>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
     // Actualizar el horario específico
     const horariosActualizados = horariosGuardados.map(h => {
       if (h.id === horarioId) {
@@ -75,14 +60,8 @@ function Apertura() {
       }
       return h;
     });
-
     // Guardar en localStorage
     localStorage.setItem('horariosActuales', JSON.stringify(horariosActualizados));
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
     alert('Datos de apertura guardados correctamente');
     navigate('/horarios');
   };
@@ -118,80 +97,6 @@ function Apertura() {
             <p><strong>Hora de salida:</strong> {horario.horaSalida}</p>
           </div>
         </div>
-
-<<<<<<< HEAD
-        <form onSubmit={handleSubmit} className="form">
-          <div className="grid-2">
-            <div className="form-group">
-              <label htmlFor="tipoUnidad">Tipo de Unidad:</label>
-              <input
-                type="text"
-                id="tipoUnidad"
-                name="tipoUnidad"
-                value={formData.tipoUnidad}
-                onChange={handleChange}
-                required
-                placeholder="Ej: Urbano, Suburbano, etc."
-                className="input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="ruta">Ruta:</label>
-              <input
-                type="text"
-                id="ruta"
-                name="ruta"
-                value={formData.ruta}
-                onChange={handleChange}
-                required
-                disabled
-                className="input input-disabled"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="economico">Económico:</label>
-              <input
-                type="text"
-                id="economico"
-                name="economico"
-                value={formData.economico}
-                onChange={handleChange}
-                required
-                placeholder="Número económico de la unidad"
-                className="input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="tarjeton">No. de Tarjetón:</label>
-              <input
-                type="text"
-                id="tarjeton"
-                name="tarjeton"
-                value={formData.tarjeton}
-                onChange={handleChange}
-                required
-                placeholder="Número de tarjetón"
-                className="input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="nombre">Nombre:</label>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                required
-                placeholder="Nombre del operador"
-                className="input"
-              />
-            </div>
-=======
         <form onSubmit={handleSubmit} className="apertura-form">
           <div className="form-group">
             <label htmlFor="tipoUnidad">Tipo de Unidad:</label>
@@ -205,7 +110,6 @@ function Apertura() {
               placeholder="Ej: Urbano, Suburbano, etc."
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="ruta">Ruta:</label>
             <input
@@ -219,7 +123,6 @@ function Apertura() {
               className="input-disabled"
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="economico">Económico:</label>
             <input
@@ -232,7 +135,6 @@ function Apertura() {
               placeholder="Número económico de la unidad"
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="tarjeton">No. de Tarjetón:</label>
             <input
@@ -245,7 +147,6 @@ function Apertura() {
               placeholder="Número de tarjetón"
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="nombre">Nombre:</label>
             <input
@@ -257,9 +158,7 @@ function Apertura() {
               required
               placeholder="Nombre del operador"
             />
->>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
           </div>
-
           <div className="form-actions">
             <button type="submit" className="btn-submit">Guardar Asignación</button>
             <button type="button" className="btn-cancel" onClick={() => navigate('/horarios')}>
