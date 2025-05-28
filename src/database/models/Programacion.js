@@ -6,6 +6,7 @@ const programacionSchema = new mongoose.Schema({
         required: [true, 'La ruta es obligatoria'],
         trim: true
     },
+<<<<<<< HEAD
     tipoVehiculo: {
         type: String,
         required: [true, 'El tipo de vehículo es obligatorio']
@@ -22,6 +23,27 @@ const programacionSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Los viajes programados son obligatorios']
     },
+=======
+    horarios: [{
+        hora: {
+            type: String,
+            required: [true, 'La hora es obligatoria']
+        },
+        corrida: {
+            type: String,
+            required: [true, 'La corrida es obligatoria']
+        },
+        apertura: {
+            type: String,
+            required: false
+        },
+        estado: {
+            type: String,
+            enum: ['pendiente', 'asignado', 'completado'],
+            default: 'pendiente'
+        }
+    }],
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
     fechaCreacion: {
         type: Date,
         default: Date.now

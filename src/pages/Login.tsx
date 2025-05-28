@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import './Login.css';
+=======
+import './style.css';
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -11,6 +15,7 @@ export default function Login() {
     // Limpiar el localStorage al montar el componente
     useEffect(() => {
         localStorage.removeItem('userRole');
+<<<<<<< HEAD
         document.body.classList.add('login-body');
         const root = document.getElementById('root');
         if (root) root.classList.add('login-root');
@@ -18,6 +23,8 @@ export default function Login() {
             document.body.classList.remove('login-body');
             if (root) root.classList.remove('login-root');
         };
+=======
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
     }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -77,12 +84,20 @@ export default function Login() {
 
     return (
         <div className="login-body">
+<<<<<<< HEAD
             <header className="login-header">
+=======
+            <header className="sitmah-header">
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
                 <h1>Sistema de Despacho de Tuzobuses</h1>
                 <p>Iniciar sesión – Acceso restringido</p>
             </header>
 
+<<<<<<< HEAD
             <main className="login-main">
+=======
+            <main className="login-container">
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
                 <div className="login-card">
                     <div className="login-logo-wrapper">
                         <img src="/src/assets/logobola.png" alt="Logo TUZ" className="login-logo-img" />
@@ -119,7 +134,11 @@ export default function Login() {
                 </div>
             </main>
 
+<<<<<<< HEAD
             <footer className="login-footer">
+=======
+            <footer className="sitmah-footer">
+>>>>>>> 3a858bb5c56c47bad9f42f60221383b03c2dac30
                 &copy; {new Date().getFullYear()} SITMAH Hidalgo – Sistema interno de control
             </footer>
         </div>
